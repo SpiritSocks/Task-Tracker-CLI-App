@@ -4,7 +4,7 @@
 int main() {
     registerCommand();
     std::string command;
-    do {
+    do{
 
         std::cin>>command;
         executeCommand(command);
