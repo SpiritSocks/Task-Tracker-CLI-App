@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <functional>
 #include <fstream>
+#include <sstream>
 //Создаем структуру консольной команды
 struct Command {
     std::string commandDescription;
@@ -17,16 +18,11 @@ void registerCommand() {
         exit(0);
     }};
 
-
-    commands["show"] = {"Show task",[]() {
-        std::ifstream file("tasks.csv");
-        std::string line;
-        std::getline(file,line);
-        while(std::getline(file,line)) {
-            std::cout<<line<<std::endl;
+    commands["show"] = {"Show tasks", []() {
+        loadTasksFromFile();
+        for (const auto &[name, task] : tasks) {
+            std::cout << name << " " << task.priority << " " << task.dueDate << std::endl;
         }
-        file.close();
-
     }};
 
     commands["remove"] = {"Remove task", []() {
@@ -78,6 +74,17 @@ void registerCommand() {
         }
     }};
 
+    commands["remove_all"] = {"Remove all tasks", []() {
+        if (std::remove("tasks.csv") != 0) {
+            std::cerr << "Error: Could not remove the file 'tasks.csv'!" << std::endl;
+        } else {
+            std::ofstream newFile("tasks.csv");
+            newFile.close();
+            std::cout << "All tasks removed successfully." << std::endl;
+        }
+    }};
+
+
 
     commands["add"] = {"Add new task",[]() {
         std::string newTaskName;
@@ -105,6 +112,23 @@ void registerCommand() {
         }
     }};
 }
+
+void loadTasksFromFile() {
+    tasks.clear();
+    std::ifstream file("tasks.csv");
+    std::string line;
+    while (std::getline(file, line)) {
+        if (line.empty()) continue;
+        std::replace(line.begin(), line.end(), ';', ' ');
+        std::istringstream iss(line);
+        std::string name, priority, dueDate;
+        if (iss >> name >> priority >> dueDate) {
+            tasks[name] = Task(name, priority, dueDate);
+        }
+    }
+    file.close();
+}
+
 
 void executeCommand(const std::string &input) {
     auto it = commands.find(input);

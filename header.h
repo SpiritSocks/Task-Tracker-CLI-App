@@ -6,6 +6,8 @@
 
 void registerCommand();
 void executeCommand(const std::string &input);
+void loadTasksFromFile();
+void saveTasksToFile();
 class Task {
 public:
     std::string name;
