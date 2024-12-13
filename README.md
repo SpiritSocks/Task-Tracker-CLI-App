@@ -7,5 +7,5 @@ This project will help you practice your programming skills, including working w
 
 Added:
 - Remove all function - allows you to clear all your tasks at once.
-- Fixed bug where, adding the first task didin't add it to your "database"
+- Fixed bug where adding the first task didin't add it to your "database"
 - Tweaked some minuscule stuff
