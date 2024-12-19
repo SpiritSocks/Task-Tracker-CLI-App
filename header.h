@@ -4,17 +4,18 @@
 #include <string>
 #include <iostream>
 
-void registerCommand();
-void executeCommand(const std::string &input);
-class Task {
+void registerCommand(); //Registers new command
+void executeCommand(const std::string &input); //Function that executes a command, which is given by user input in the console
+
+class Task { //Task class. It stores the name, priority and due date of the task
 public:
     std::string name;
     std::string priority;
     std::string dueDate;
 
-    Task();
-    Task(const std::string& name, const std::string& priority, const std::string& dueDate);
-    ~Task();
+    Task(); //default constructor
+    Task(const std::string& name, const std::string& priority, const std::string& dueDate); //constructor
+    ~Task(); //destructor
 };
 
 #endif
