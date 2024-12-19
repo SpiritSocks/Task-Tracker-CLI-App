@@ -1,4 +1,6 @@
 # Task-Tracker-CLI-App
-Task Tracker project. In this task, I will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on.
+Task Tracker project. In this task, I will build a simple command line interface (CLI) to track what you need to do.
 
-This project will help you practice your programming skills, including working with the filesystem, handling user inputs, and building a simple CLI application.
+I started this project to learn about OOP and using the console. My main goal was to create a system, where users can create, delete, show tasks.
+Lets look at the features in detail. 
+  
